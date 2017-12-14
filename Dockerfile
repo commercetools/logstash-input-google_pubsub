@@ -1,11 +1,5 @@
-FROM logstash:5
+FROM docker.elastic.co/logstash/logstash:6.1.0
 
 MAINTAINER Sergey Melnik <sergey.melnik@commercetools.com>
 
-ENV PATH=/usr/share/logstash/vendor/jruby/bin/:$PATH
-
-COPY ./ /opt/logstash-plugin
-
-RUN cd /opt/logstash-plugin/ && gem build logstash-input-google_pubsub.gemspec
-
-RUN logstash-plugin install /opt/logstash-plugin/logstash-input-google_pubsub-0.9.1.gem
+RUN logstash-plugin install logstash-input-google_pubsub
